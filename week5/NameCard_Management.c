@@ -30,14 +30,15 @@ void input_card()
     t = (card *)calloc(1, sizeof(card));
     printf("\nInput namecard menu : ");
     printf("\nInput name : ");
-    fgets(t->name, sizeof(t->name), stdin); // fgets로 변경
-    t->name[strcspn(t->name, "\n")] = '\0'; // 개행 문자 제거
+    fgets(t->name, sizeof(t->name), stdin); 
+    t->name[strcspn(t->name, "\n")] = '\0'; 
     printf("\nInput corporation : ");
-    fgets(t->corp, sizeof(t->corp), stdin); // fgets로 변경
-    t->corp[strcspn(t->corp, "\n")] = '\0'; // 개행 문자 제거
+    fgets(t->corp, sizeof(t->corp), stdin); 
+    t->corp[strcspn(t->corp, "\n")] = '\0';
     printf("\nInput telephone number : ");
-    fgets(t->tel, sizeof(t->tel), stdin); // fgets로 변경
-    t->tel[strcspn(t->tel, "\n")] = '\0'; // 개행 문자 제거
+    fgets(t->tel, sizeof(t->tel), stdin); 
+    t->tel[strcspn(t->tel, "\n")] = '\0'; 
+
     t->next = head->next;
     head->next = t;
 }
@@ -78,7 +79,7 @@ void save_card(char *s)
 {
     FILE *fp;
     card *t;
-    fopen_s(&fp, s, "wb");
+    fp = fopen(s, "wb");
 
     t = head->next;
     while(t != tail)
@@ -93,7 +94,7 @@ void load_card(char *s)
 {
     FILE *fp;
     card *t, *u;
-    fopen_s(&fp, s, "rb");
+    fp = fopen(s, "rb");
 
     t = head->next;
     while(t != tail)
@@ -150,14 +151,13 @@ int select_menu()
     do
     {
         printf("\n: selection operation ->");
-        fgets(s, sizeof(s), stdin); // 안전한 입력 수행
+        fgets(s, sizeof(s), stdin); 
 
-        // 개행 문자 제거
         if (s[strlen(s) - 1] == '\n') {
             s[strlen(s) - 1] = '\0';
         }
 
-        j = atoi(s); // 입력된 문자열을 정수로 변환
+        j = atoi(s); 
 
     }while(j < 0 || j > 7);
     
@@ -184,9 +184,8 @@ void main()
             
             case 2:
                 printf("\nInput name to delete -> ");
-                fgets(name, sizeof(name), stdin); // 안전한 입력 수행
+                fgets(name, sizeof(name), stdin); 
 
-                // 개행 문자 제거
                 if (name[strlen(name) - 1] == '\n') {
                     name[strlen(name) - 1] = '\0';
                 }
@@ -196,9 +195,8 @@ void main()
                 break;
             case 3:
                 printf("\nInput name to search -> ");
-                fgets(name, sizeof(name), stdin); // 안전한 입력 수행
+                fgets(name, sizeof(name), stdin); 
 
-                // 개행 문자 제거
                 if (name[strlen(name) - 1] == '\n') {
                     name[strlen(name) - 1] = '\0';
                 }
@@ -210,10 +208,10 @@ void main()
                 print_card(t, stdout);
                 break;
             case 4:
-                load_card(fname); // 함수명 오타 수정
+                load_card(fname); 
                 break;
             case 5:
-                save_card(fname); // 함수명 오타 수정
+                save_card(fname); 
                 break;
             case 6:
                 t = head->next;

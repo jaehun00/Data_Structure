@@ -9,18 +9,16 @@ typedef struct _node{
 node *head;
 
 void insert_nodes(char ch){
-    node *t;\
+    node *t;
     char start = 'A';
-    int i;
-    int finish = ch - 'A' + 1; 
     t = (node *)calloc(1, sizeof(node));
     t->key = start++;
     head = t;
-    for(i=2; i<=finish; i++){
+    do{
         t->next = (node *)calloc(1, sizeof(node));
         t = t->next;
         t->key = start++;
-    }
+    }while(start<=ch);
     t->next = head;
 }
 

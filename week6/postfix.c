@@ -75,25 +75,43 @@ void print_stack()
     }
 }
 
+// dst <= want to print
+// src <= Input source
+void postfix(char *dst, char *src)
+{
+    char c;
+    init_stack();
+    while(*src){
+        // stage 4 : if meet ")" pop
+        if(*src == ')'){
+            *dst++ = pop();
+            *dst = ' ';
+            src++;
+        }
+        // stage 3 : if meet operator push
+        else if(*src == '+' || *src == '-' || *src == '*' || *src == '/'){
+            push(*src);
+            src++;
+        }
+        // stage 2 : if meet num put in dst
+        else if(*src >= '0' && *src <= '9'){
+            do{
+                *dst++ = *src++;
+            }while(*src >= '0' && *src <= '9');
+            *dst++ = ' ';
+        }
+        else
+            src++;
+    }
+    *dst = 0;
+}
+
 void main()
 {
-    int k;
-    init_stack();
+    char exp[256];
+    char src[256] = "(1+(2*3))";
 
-    push(3);
-    push(6);
-    push(9);
-    push(1);
-    push(6);
-    push(3);
+    postfix(exp, src);
+    printf("Postfix representation : %s\n", exp);
 
-    push(4);
-    push(8);
-    push(7);
-    push(2);
-    push(0);
-    pop();
-
-    clear();
-    print_stack();
 }

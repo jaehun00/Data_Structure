@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+// Queue => First in First Out
 typedef struct _dnode
 {
     int key;
