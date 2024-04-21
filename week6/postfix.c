@@ -106,6 +106,45 @@ void postfix(char *dst, char *src)
     *dst = 0;
 }
 
+int calc_postfix(char *exp){
+    char token;
+    int i, op1, op2;
+    clear();
+    init_stack();
+    while(*exp){
+        if(*exp >= '0' && *exp <= '9'){
+            do{
+                i = *exp -'0';
+                push(i);
+                exp++;
+            }while(*exp >= '0' && *exp <= '9');
+        }
+        else if(*exp == '+' || *exp == '-' || *exp == '*' || *exp == '/'){
+            op2 = pop();
+            op1 = pop();
+            switch (*exp)
+            {
+                case '+':
+                    push((op1+op2));
+                    break;
+                case '-':
+                    push((op1-op2));
+                    break;
+                case '*':
+                    push((op1*op2));
+                    break;
+                case '/':
+                    push((op1/op2));
+                    break;
+            }
+            exp++;
+        }
+        else
+            exp++;
+    }
+    return pop();
+}
+
 void main()
 {
     char exp[256];
@@ -114,4 +153,6 @@ void main()
     postfix(exp, src);
     printf("Postfix representation : %s\n", exp);
 
+    int result = calc_postfix(exp);
+    printf("Postfix result : %d\n",result);
 }
