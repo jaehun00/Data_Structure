@@ -85,7 +85,7 @@ void CCA()
             int y = i;
             while(1){
                 if(flag == 0){
-                    int found = 0;
+                    int found = 0;  //False
                     for(k = 0; k < 8; k++){
                         nx = x + dx[k];
                         ny = y + dy[k];
@@ -97,13 +97,14 @@ void CCA()
                             input_map[ny][nx] = label;
                             x = nx;
                             y = ny;
-                            found = 1;
+                            found = 1;  //True
                             break;
                         } 
                     }
                     if(head->next==tail){
                         break;
                     }
+                    // if False
                     else if(!found){
                         flag = 1;
                     }
@@ -120,7 +121,7 @@ void CCA()
                     int py = pos->height;
                     free(pos);
 
-                    int found = 0;
+                    int found = 0;  //False
                     for(k = 0; k < 8; k++){
                         nx = px + dx[(d + k) % 8];
                         ny = py + dy[(d + k) % 8];
@@ -133,10 +134,11 @@ void CCA()
                             input_map[ny][nx] = label;
                             x = nx;
                             y = ny;
-                            found = 1;
+                            found = 1;  //True
                             break;
                         }
                     }
+                    // if True
                    if(found){
                         flag = 0;
                     }

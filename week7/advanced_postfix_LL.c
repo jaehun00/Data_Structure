@@ -131,11 +131,6 @@ int calc_postfix(char *src){
             push(i);
             src++;
         }
-        else if(*src > '9'){
-            int i = atoi(src);
-            push(i);
-            src++;
-        }
         else if(is_op(*src)){
             int op2 = pop();
             int op1 = pop();
