@@ -1,5 +1,6 @@
 # include <stdio.h>
 # include <stdlib.h>
+# include <string.h>
 # include <time.h>
 
 int intcmp(const void *a, const void *b){
