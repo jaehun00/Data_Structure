@@ -19,7 +19,7 @@ void init_stack(){
 
 int push(int k){
     node *t;
-    if(t = (node *)malloc(sizeof(node))==NULL){
+    if((t = (node *)malloc(sizeof(node)))==NULL){
         printf("Out of memory !\n");
         return -1;
     }
@@ -33,7 +33,7 @@ int pop(){
     node *t;
     int k;
     if(head->next==tail){
-        print("Stack underflow !\n");
+        printf("Stack underflow !\n");
         return -1;
     }
     t = head->next;

@@ -44,7 +44,7 @@ void noise_remove(float *input, float *output, int height, int width){
                 }
             }
             median_filtering(temp, cnt, sizeof(float), intcmp);
-            output[y*width + x] = temp[cnt%2+1];
+            output[y*width + x] = temp[cnt%2];
         }
     }
 
