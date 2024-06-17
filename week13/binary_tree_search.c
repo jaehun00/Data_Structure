@@ -74,9 +74,9 @@ void main() {
     d = bti_delete_compact(&key, t, &del, sizeof(char), charcmp);
 
     t = head->left;
-    printf("%c\n", *(char *)(t+1));
+    printf("%c\n", *(t+1));
     t = head->left->left;
-    printf("%c\n", *(char *)(t+1));
+    printf("%c\n", *(t+1));
 }
 
 void init_tree(node **p){

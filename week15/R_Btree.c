@@ -67,7 +67,7 @@ void init_tree(node **p){
 }
 
 void visit(node *t){
-    printf("%c", *(char *)(t+1));
+    printf("%c", *(t+1));
 }
 
 void inorder_traverse(node *p){
@@ -85,11 +85,13 @@ node *rotate(void *key, node *pivot, node *base, FCMP fcmp){
     else
         child = pivot->right;
     
+    // L rotate
     if(fcmp(key, child + 1) < 0){
         gchild = child->left;
         child->left = gchild->right;
         gchild->right = child;
     }
+    //R rotate
     else{
         gchild = child->right;
         child->right = gchild->left;
@@ -110,24 +112,31 @@ node *rbti_insert(void *key, node *base, int *num, int width, FCMP fcmp){
     t = base->left;
 
     // key 위치
+    // check if t == NULL break
     while(t != NULL){
+        //check key, t->key same
         if(fcmp(key, t + 1) == 0) return NULL;
-
+        // 
         if(t->left && t->right && t->left->red && t->right->red){
             t->red = 1;
             t->left->red = t->right->red = 0;
             if(parent->red){
                 gparent->red = 1;
+                // LR or LL
                 if((fcmp(key, gparent + 1) < 0) != (fcmp(key, parent + 1) < 0))
                     parent = rotate(key, gparent, base, fcmp);
+
+                // LL or RR
                 t = rotate(key, ggparent, base, fcmp);
                 t->red = 0;
             }
             base->left->red = 0;
         }
+        // move
         ggparent = gparent;
         gparent = parent;
         parent = t;
+        // if cur key large -> left
         if(fcmp(key, t + 1) < 0) t = t->left;
         else t = t->right;
     }

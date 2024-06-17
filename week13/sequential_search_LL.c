@@ -53,7 +53,7 @@ void main(){
         p = llv_search(&key, t, &size, sizeof(char), charcmp, &pos);
         if(p==NULL) break;
 
-        printf("index: %d, value: %s \n", pos, (char *)p);
+        printf("index: %d, value: %s \n", pos, (node *)p);
         t = (node *)p - 1;
     }
     
